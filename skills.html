@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon"" href=" assets/images/favicon.ico">
+    <title>Me</title>
+
+    <!-- Link do Tailwind via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        body {
+            background: url('assets/images/fundo.gif') no-repeat center center fixed;
+            background-size: cover;
+            font-family: 'Inconsolata', monospace;
+            color: #f8f8f2;
+            padding: 2rem;
+        }
+
+        .footer-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: black;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 20px 0;
+            z-index: 9999;
+        }
+
+        .footer-nav .nav-link {
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-family: 'Maven Pro', sans-serif;
+            font-weight: 600;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-nav .nav-link img {
+            width: 20px;
+            height: 20px;
+            filter: invert(1);
+            /* Deixa os ícones brancos */
+        }
+
+        .footer-nav .nav-link:hover {
+            color: #ff69b4;
+            /* Rosa ao passar o mouse */
+        }
+
+        .footer-nav .nav-link:hover img {
+            filter: brightness(0) saturate(100%) invert(39%) sepia(99%) saturate(741%) hue-rotate(297deg) brightness(103%) contrast(101%);
+            /* Faz o ícone também ficar rosa ao hover */
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 1s ease-in-out;
+        }
+    </style>
+</head>
+<footer class="footer-nav">
+    <a href="index.html" class="nav-link">
+        <img src="assets/icons/home.svg" alt="Home Icon"> Início
+    </a>
+    <a href="about.html" class="nav-link">
+        <img src="assets/icons/about.svg" alt="About Icon"> Resumo
+    </a>
+    <a href="project.html" class="nav-link">
+        <img src="assets/icons/projects.svg" alt="Projects Icon"> Projetos
+    </a>
+    <a href="skills.html" class="nav-link">
+        <img src="assets/icons/skills.svg" alt="Skills Icon"> Eu
+    </a>
+    <a href="contact.html" class="nav-link">
+        <img src="assets/icons/contact.svg" alt="Contact Icon"> Contatos
+    </a>
+</footer>
+
+<body class="bg-black text-white">
+
+    <section class="px-6 py-16 min-h-screen" id="about">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-4xl font-bold text-white mb-8">Sobre mim</h2>
+
+            <p class="text-lg text-gray-300 leading-relaxed animate-fade-in">
+                <span class="text-5xl font-light text-gray-400 mr-1">C</span>
+                om atuação na área de manutenção de computadores e redes — sejam físicas ou virtuais — tenho um carinho
+                especial por essa vertente da TI. Desde o ensino médio, quando cursei
+                <span class="text-red-400 underline underline-offset-4">Informática no Instituto Federal do
+                    Maranhão</span> , senti vontade de me aprofundar nos componentes dos computadores: o que cada um
+                faz, como funciona... E, claro, isso logo se estendeu a roteadores, switches, servidores — físicos ou
+                lógicos — e tudo mais que compõe esse universo.
+            </p>
+
+            <p class="text-lg text-gray-300 leading-relaxed mt-4 animate-fade-in">
+                Mais do que a vontade de aprender infraestrutura e redes, meu interesse também se estende à linguagem.
+                Escrevo desde muito nova e, fora da escola, aprofundei meus estudos em gramática, guiada pela filosofia
+                do Trivium.
+                <span class="text-red-400 underline underline-offset-4">Para mim, estudar a língua portuguesa é mais do
+                    que interessante</span>— é uma forma de demonstrar respeito ao próprio pensamento. Afinal, se ele é
+                útil e digno de ser ouvido, devemos nos esforçar para expressá-lo da melhor forma possível.
+            </p>
+
+            <p class="text-lg text-gray-300 leading-relaxed mt-4 animate-fade-in">
+                Sou fã de The Big Bang Theory, The Office, Scream Queens e todas aquelas séries de humor meio duvidoso.
+                Amo minha cachorrinha, Soren — gosto de fazer carinho nela e ouvir música.
+                <span class="text-red-400 underline underline-offset-4">Tenho interesse em continuar minha formação,
+                    buscar novos certificados e, cada vez mais, desenvolver um espírito ativo e comprometido com o que
+                    faço.
+            </p>
+        </div>
+    </section>
+
+</body>
+
+</html>

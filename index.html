@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfólio - Ana Clara</title>
+  <link rel="icon" type="image/x-icon"" href=" assets/images/favicon.ico">
+
+  <link rel="stylesheet" href="styles/index.css">
+  <link href="https://fonts.googleapis.com/css2?family=Asap:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Maven+Pro:wght@400..900&display=swap" rel="stylesheet">
+</head>
+
+
+<style>
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+    cursor: none;
+    overflow-x: hidden;
+  }
+
+  #particleCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 9999;
+    /* Sobre tudo */
+    pointer-events: none;
+    /* Não atrapalha clique */
+  }
+
+
+  header,
+  section,
+  .footer-nav,
+  .badges,
+  .content-icons {
+    position: relative;
+    z-index: 1;
+    /* deixa abaixo do canvas que agora tá em 9999 */
+  }
+</style>
+
+<script>
+  const canvas = document.getElementById('particleCanvas');
+  const ctx = canvas.getContext('2d');
+
+  function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+
+  resizeCanvas();
+  window.addEventListener('resize', resizeCanvas);
+
+
+  let mouse = { x: canvas.width / 2, y: canvas.height / 2 };
+
+  document.addEventListener('mousemove', (e) => {
+    mouse.x = e.clientX;
+    mouse.y = e.clientY;
+  });
+
+  let particles = [];
+
+  function createParticle() {
+    particles.push({
+      x: mouse.x,
+      y: mouse.y,
+      size: Math.random() * 5 + 2,
+      opacity: 1,
+      speedX: (Math.random() - 0.5) * 1.5,
+      speedY: (Math.random() - 0.5) * 1.5
+    });
+  }
+
+  function handleParticles() {
+    for (let i = 0; i < particles.length; i++) {
+      let p = particles[i];
+      p.x += p.speedX;
+      p.y += p.speedY;
+      p.opacity -= 0.015;
+      p.size *= 0.96;
+
+      if (p.opacity <= 0 || p.size <= 0.5) {
+        particles.splice(i, 1);
+        i--;
+      }
+    }
+  }
+
+  function connectParticles() {
+    for (let a = 0; a < particles.length; a++) {
+      for (let b = a + 1; b < particles.length; b++) {
+        let dx = particles[a].x - particles[b].x;
+        let dy = particles[a].y - particles[b].y;
+        let distance = Math.sqrt(dx * dx + dy * dy);
+
+        if (distance < 80) {
+          ctx.beginPath();
+          ctx.strokeStyle = `rgba(255, 105, 180, ${(1 - distance / 80) * 0.5})`; // Rosa + fade conforme a distância
+          ctx.lineWidth = 2;
+          ctx.moveTo(particles[a].x, particles[a].y);
+          ctx.lineTo(particles[b].x, particles[b].y);
+          ctx.stroke();
+        }
+      }
+    }
+  }
+
+  function drawParticles() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    for (let p of particles) {
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(255, 105, 180, ${p.opacity})`; // Rosa com fade
+      ctx.fill();
+    }
+    connectParticles();
+  }
+
+  function animate() {
+    createParticle();
+    handleParticles();
+    drawParticles();
+    requestAnimationFrame(animate);
+  }
+
+  animate();
+</script>
+
+<footer class="footer-nav">
+  <a href="index.html" class="nav-link">
+    <img src="assets/icons/home.svg" alt="Home Icon"> Início
+  </a>
+  <a href="about.html" class="nav-link">
+    <img src="assets/icons/about.svg" alt="About Icon"> Resumo
+  </a>
+  <a href="project.html" class="nav-link">
+    <img src="assets/icons/projects.svg" alt="Projects Icon"> Projetos
+  </a>
+  <a href="skills.html" class="nav-link">
+    <img src="assets/icons/skills.svg" alt="Skills Icon"> Eu
+  </a>
+  <a href="contact.html" class="nav-link">
+    <img src="assets/icons/contact.svg" alt="Contact Icon"> Contatos
+  </a>
+</footer>
+
+
+<body class="container">
+  <canvas id="particleCanvas"></canvas>
+  <header>
+    <section class="intro">
+      <div class="bio">
+        <div class="avatar">
+          <img src="assets/images/icone.gif" alt="Ícone da Aninha" class="gif-avatar">
+        </div>
+        <div class="info">
+          <p>01001111 01101100 11100001 10100001! Meu nome é <span>Ana Clara </span> e sou</p>
+          <h1 id="title">
+            <span class="pink">Técnica</span>&nbsp;<span class="white">em</span>&nbsp;<span
+              class="blue">Informática</span>
+          </h1>
+          <h3>Entre linguagens de máquina e humanas, transformo código em comunicação e palavras em tecnologia.
+          </h3>
+        </div>
+      </div>
+      <section class="badges">
+        <div class="content-icons">
+          <img src="assets/icons/cloud-computing-seo-and-web-svgrepo-com.svg" alt="Ícone redes">
+          <span>Redes</span>
+        </div>
+        <div class="content-icons">
+          <img src="assets/icons/laptop-electronics-svgrepo-com.svg" alt="Manutenção de computadores">
+          <span>Manutenção</span>
+        </div>
+        <div class="content-icons">
+          <img src="assets/icons/HTML.svg" alt="Icone HTML">
+          <span>HTML</span>
+        </div>
+        <div class="content-icons">
+          <img src="assets/icons/CSS.svg" alt="Icone CSSS">
+          <span>CSS</span>
+        </div>
+        <div class="content-icons">
+          <img src="assets/icons/JavaScript.svg" alt="Icone JavaScript">
+          <span>JavaScript</span>
+        </div>
+        <div class="content-icons">
+          <img src="assets/icons/java-svgrepo-com.svg" alt="Icone React">
+          <span>Java OO</span>
+        </div>
+      </section>
+
+      </a>
+    </section>
+  </header>
+  <script>
+    window.onload = function () {
+      const canvas = document.getElementById('particleCanvas');
+      const ctx = canvas.getContext('2d');
+
+      function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
+
+      resizeCanvas();
+      window.addEventListener('resize', resizeCanvas);
+
+      let mouse = { x: canvas.width / 2, y: canvas.height / 2 };
+
+      document.addEventListener('mousemove', (e) => {
+        mouse.x = e.clientX;
+        mouse.y = e.clientY;
+      });
+
+      let particles = [];
+
+      function createParticle() {
+        particles.push({
+          x: mouse.x,
+          y: mouse.y,
+          size: Math.random() * 5 + 2,
+          opacity: 1,
+          speedX: (Math.random() - 0.5) * 1.5,
+          speedY: (Math.random() - 0.5) * 1.5
+        });
+      }
+
+      function handleParticles() {
+        for (let i = 0; i < particles.length; i++) {
+          let p = particles[i];
+          p.x += p.speedX;
+          p.y += p.speedY;
+          p.opacity -= 0.015;
+          p.size *= 0.96;
+
+          if (p.opacity <= 0 || p.size <= 0.5) {
+            particles.splice(i, 1);
+            i--;
+          }
+        }
+      }
+
+      function connectParticles() {
+        for (let a = 0; a < particles.length; a++) {
+          for (let b = a + 1; b < particles.length; b++) {
+            let dx = particles[a].x - particles[b].x;
+            let dy = particles[a].y - particles[b].y;
+            let distance = Math.sqrt(dx * dx + dy * dy);
+
+            if (distance < 80) {
+              ctx.beginPath();
+              ctx.strokeStyle = `rgba(255, 105, 180, ${(1 - distance / 80) * 0.5})`;
+              ctx.lineWidth = 2;
+              ctx.moveTo(particles[a].x, particles[a].y);
+              ctx.lineTo(particles[b].x, particles[b].y);
+              ctx.stroke();
+            }
+          }
+        }
+      }
+
+      function drawParticles() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (let p of particles) {
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(255, 105, 180, ${p.opacity})`;
+          ctx.fill();
+        }
+        connectParticles();
+      }
+
+      function animate() {
+        createParticle();
+        handleParticles();
+        drawParticles();
+        requestAnimationFrame(animate);
+      }
+
+      animate();
+    };
+  </script>
+
+</body>
+<style>
+  .footer-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: black;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 20px 0;
+    z-index: 9999;
+  }
+
+  .footer-nav .nav-link {
+    color: white;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'Maven Pro', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    transition: color 0.3s ease;
+  }
+
+  .footer-nav .nav-link img {
+    width: 20px;
+    height: 20px;
+    filter: invert(1);
+    /* Deixa os ícones brancos */
+  }
+
+  .footer-nav .nav-link:hover {
+    color: #ff69b4;
+    /* Rosa ao passar o mouse */
+  }
+
+  .footer-nav .nav-link:hover img {
+    filter: brightness(0) saturate(100%) invert(39%) sepia(99%) saturate(741%) hue-rotate(297deg) brightness(103%) contrast(101%);
+    /* Faz o ícone também ficar rosa ao hover */
+  }
+
+  .gif-avatar {
+    width: 120px;
+    /* Tamanho menor */
+    height: 120px;
+    border-radius: 50%;
+    /* Deixa redondo */
+    object-fit: cover;
+    /* Garante que o gif não fique espremido */
+    border: 2px solid #f08ac2;
+    /* Opcional: borda rosinha pra ficar cute */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* Sombra leve pra destacar */
+  }
+
+  .pink {
+    color: #ff69b4;
+    /* Rosa pink */
+  }
+
+  .white {
+    color: #ffffff;
+    /* Branco */
+  }
+
+  .blue {
+    color: #6495ed;
+    /* Azul claro */
+  }
+
+  .bounce {
+    animation: bounce 0.6s;
+  }
+
+  @keyframes bounce {
+
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  * {
+    box-sizing: border-box;
+    flex-wrap: wrap;
+  }
+
+  .intro {
+
+    background-image: url("assets/images/fundo.gif");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    min-height: 100vh;
+    background-color: lightgray 50%;
+
+    .bio {
+      display: flex;
+      flex-direction: column;
+      padding: 120px 180px 80px 180px;
+      align-items: center;
+
+      .avatar {
+        position: relative;
+        /* define que é a caixa como posição relativa. os elementos filhos sâo absolutos a ele*/
+      }
+
+      .icone {
+        position: absolute;
+        /* tem a posicao absoluta ao pai que é relativo*/
+        bottom: 0;
+        right: 1px;
+      }
+    }
+
+    .info {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      p {
+        font: var(--subtitle);
+        color: var(--base-gray-500);
+        margin-bottom: 8px;
+        gap: 12px;
+        margin-top: 64px;
+
+        span {
+          color: var(--main-red);
+        }
+      }
+
+      h1 {
+        display: flex;
+        font: var(--title-lg);
+        color: var(--base-gray-600);
+        font-weight: 700;
+        justify-content: center;
+      }
+
+      h3 {
+
+        font: var(--text-sm);
+        color: var(--base-gray-400);
+        text-align: center;
+        margin: 20px 80px;
+      }
+    }
+
+    .badges {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+
+      .content-icons {
+        display: flex;
+        background: linear-gradient(to right, white 50%, var(--base-gray-300) 50%);
+        background-size: 200% 100%;
+        background-position: right bottom;
+        border-radius: 999px;
+        padding: 8px 16px;
+        align-items: center;
+        gap: 8px;
+        transition: background-position 0.4s ease;
+
+        img {
+          width: 24px;
+          height: 24px;
+        }
+
+        span {
+          font: var(--text-md);
+          color: var(--base-gray-500);
+        }
+
+        img span {
+          align-self: center;
+        }
+
+        &:hover {
+          background-position: left bottom;
+        }
+
+        &:hover span {
+          color: var(--base-gray-800);
+        }
+      }
+    }
+
+
+
+    .next {
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 94px 0px 129px;
+      /* padding-bottom: 57px ; */
+
+      img {
+        width: 32px;
+        height: 32px;
+      }
+    }
+  }
+
+  html {
+    scroll-behavior: smooth;
+    /*scroll suave*/
+
+  }
+
+  .scroll-image {
+    cursor: pointer;
+    transition: transform 0.8s ease;
+  }
+
+  .scroll-image:hover {
+    transform: scale(1.1);
+
+    #section2 {
+      padding: 100px;
+      background-color: #f0f0f0;
+    }
+  }
+
+  @media only screen and (max-width: 768px) {
+
+
+    .intro {
+
+      min-height: auto;
+
+      .bio {
+        display: flex;
+        flex-direction: column;
+        padding: 10px;
+        align-items: center;
+        flex-wrap: wrap;
+
+
+      }
+
+      .next {
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 50px 0px 50px;
+        /* padding-bottom: 57px ; */
+
+      }
+
+      .info {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        p {
+          font-size: 20px;
+          text-align: center;
+
+          margin-top: 40px 0px 10px 0px;
+          flex-wrap: wrap;
+
+        }
+
+        span {
+          display: inline-block;
+        }
+
+        h1 {
+          font-size: 30px;
+          margin-bottom: 10px;
+          text-align: center;
+        }
+
+        h3 {
+
+          font-size: 18px;
+          margin: 20px;
+        }
+      }
+
+      .badges {
+
+        flex-wrap: wrap;
+        justify-content: center;
+
+        .content-icons {
+          display: flex;
+          padding: 8px;
+
+
+        }
+      }
+    }
+  }
+
+  .content-icons {
+    display: flex;
+    background-color: var(--base-gray-300);
+    border-radius: 999px;
+    padding: 8px 16px;
+    align-items: center;
+    gap: 8px;
+    transition: transform 0.3s ease-in-out;
+    /* Isso aqui é importante pro efeito ficar suave */
+  }
+
+  .content-icons:hover {
+    transform: scale(1.1);
+    /* Aumenta um pouquinho */
+  }
+</style>
+
+<script>
+  const title = document.getElementById("title");
+
+  const options = [
+    '<span class="pink">Técnica</span>&nbsp;<span class="white">em</span>&nbsp;<span class="blue">Informática</span>',
+    '<span class="pink">Professora</span>&nbsp;<span class="white">em</span>&nbsp;<span class="blue">Formação</span>'
+  ];
+
+  let current = 0;
+
+  setInterval(() => {
+    current = (current + 1) % options.length;
+    title.classList.add("bounce");
+    title.innerHTML = options[current];
+    setTimeout(() => title.classList.remove("bounce"), 600);
+  }, 4000);
+</script>
+
+</html>
