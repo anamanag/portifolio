@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<link rel="icon" type="image/x-icon"" href=" assets/images/favicon.ico">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Me</title>
+    <style>
+        body {
+            background: url('assets/images/fundo.gif') no-repeat center center fixed;
+            background-size: cover;
+            font-family: 'Inconsolata', monospace;
+            color: #f8f8f2;
+            height: 100vh;
+            margin: 0;
+            padding: 50px;
+            display: flex;
+            justify-content: center;
+            /* Centraliza os dois blocos no meio */
+            align-items: flex-start;
+            box-sizing: border-box;
+            gap: 80px;
+            /* Espaço entre o bloco da esquerda e o da direita */
+        }
+
+
+        .contact-links,
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .contact-links a {
+            text-decoration: underline;
+            text-decoration-color: #ffb6c1;
+        }
+
+        .contact-links button {
+            background-color: #1a1a1a;
+            border: none;
+            color: #ff69b4;
+            padding: 20px;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            border-radius: 15px;
+            cursor: pointer;
+            width: 300px;
+        }
+
+        .contact-links button:hover {
+            background-color: #2a2a2a;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            background-color: #1a1a1a;
+            border: 1px solid #ff69b4;
+            color: #ff69b4;
+            padding: 15px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 16px;
+            width: 400px;
+        }
+
+        .contact-form textarea {
+            resize: none;
+            height: 200px;
+        }
+
+        .contact-form button {
+            background-color: #ff69b4;
+            border: none;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 20px;
+            font-family: 'Courier New', monospace;
+            cursor: pointer;
+            color: #1a1a1a;
+            width: 400px;
+        }
+
+        h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: #ff69b4;
+        }
+
+        .footer-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: black;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 20px 0;
+            z-index: 9999;
+        }
+
+        .footer-nav .nav-link {
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-family: 'Maven Pro', sans-serif;
+            font-weight: 600;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-nav .nav-link img {
+            width: 20px;
+            height: 20px;
+            filter: invert(1);
+            /* Deixa os ícones brancos */
+        }
+
+        .footer-nav .nav-link:hover {
+            color: #ffb6c1;
+            /* Rosa ao passar o mouse */
+        }
+
+        .footer-nav .nav-link:hover img {
+            filter: brightness(0) saturate(100%) invert(39%) sepia(99%) saturate(741%) hue-rotate(297deg) brightness(103%) contrast(101%);
+            /* Faz o ícone também ficar rosa ao hover */
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<footer class="footer-nav">
+    <a href="index.html" class="nav-link">
+        <img src="assets/icons/home.svg" alt="Home Icon"> Início
+    </a>
+    <a href="about.html" class="nav-link">
+        <img src="assets/icons/about.svg" alt="About Icon"> Resumo
+    </a>
+    <a href="project.html" class="nav-link">
+        <img src="assets/icons/projects.svg" alt="Projects Icon"> Projetos
+    </a>
+    <a href="skills.html" class="nav-link">
+        <img src="assets/icons/skills.svg" alt="Skills Icon"> Eu
+    </a>
+    <a href="contact.html" class="nav-link">
+        <img src="assets/icons/contact.svg" alt="Contact Icon"> Contatos
+    </a>
+</footer>
+
+<body>
+    <!-- CONTATOS À ESQUERDA -->
+    <div class="contact-links">
+        <h1>Quer falar comigo?</h1>
+
+        <a href="https://wa.me/559985243054?text=oiii,%20quero%20te%20conhecer" target="_blank">
+            <button><i class="fab fa-whatsapp fa-lg"></i> WhatsApp</button>
+        </a>
+
+        <a href="https://www.linkedin.com/in/ana-clara-araujo-vaz-26b998301/" target="_blank">
+            <button><i class="fab fa-linkedin fa-lg"></i> LinkedIn</button>
+        </a>
+
+        <a href="https://www.instagram.com/a.araujovaz/" target="_blank">
+            <button><i class="fab fa-instagram fa-lg"></i> Instagram</button>
+        </a>
+
+        <a href="https://substack.com/@mirabiliam" target="_blank">
+            <button><i class="fas fa-pen fa-lg"></i> Substack</button>
+        </a>
+    </div>
+
+    <!-- FORMULÁRIO À DIREITA -->
+    <form class="contact-form" onsubmit="return sendEmail(event)">
+        <input type="text" id="name" placeholder="Nome" required />
+        <input type="email" id="email" placeholder="Email" required />
+        <textarea id="message" placeholder="Envie sua mensagem :)" required></textarea>
+        <button type="submit">Vamos amigar</button>
+    </form>
+
+    <script>
+        function sendEmail(event) {
+            event.preventDefault();
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+
+            const mailtoLink = `mailto:anaaraujovzz@gmail.com?subject=Contact from ${name}&body=From: ${name} (${email})%0A%0A${encodeURIComponent(message)}`;
+            window.location.href = mailtoLink;
+            return false;
+        }
+    </script>
+</body>
+
+</html>
