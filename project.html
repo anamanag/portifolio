@@ -4,33 +4,36 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/x-icon"" href=" assets/images/favicon.ico">
-  <title>Projetos da Aninha</title>
-
+  <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
+  <title>Projects</title>
   <style>
     body {
+      margin: 0;
       background: url('assets/images/fundo.gif') no-repeat center center fixed;
       background-size: cover;
-      font-family: 'Inconsolata', monospace;
+      font-family: 'Maven Pro', sans-serif;
       color: #f8f8f2;
       padding: 2rem;
+      animation: fadeIn 1.2s ease-in;
     }
 
-    .typing-title-container {
-      display: flex;
-      justify-content: center;
-      margin-bottom: 3rem;
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+      }
+
+      100% {
+        opacity: 1;
+      }
     }
 
-    #typing-title {
+    #title {
       font-size: 1.8rem;
-      /* Diminui a fonte */
-      font-family: 'Inconsolata', monospace;
+      text-align: center;
       color: white;
+      border-right: 2px solid #ff69b4;
       white-space: nowrap;
       overflow: hidden;
-      border-right: 2px solid #ff69b4;
-      /* Cursor rosa embutido */
       padding-right: 5px;
     }
 
@@ -121,45 +124,26 @@
       width: 20px;
       height: 20px;
       filter: invert(1);
-      /* Deixa os ícones brancos */
     }
 
     .footer-nav .nav-link:hover {
       color: #ff69b4;
-      /* Rosa ao passar o mouse */
     }
 
     .footer-nav .nav-link:hover img {
       filter: brightness(0) saturate(100%) invert(39%) sepia(99%) saturate(741%) hue-rotate(297deg) brightness(103%) contrast(101%);
-      /* Faz o ícone também ficar rosa ao hover */
     }
 
     .pink {
       color: #ff69b4;
-      /* Rosa pink */
     }
 
     .white {
       color: #ffffff;
-      /* Branco */
     }
 
     .blue {
       color: #6495ed;
-      /* Azul claro */
-    }
-
-    /* Estilização adicional */
-    .pink,
-    .white,
-    .blue {
-      display: inline-block;
-      text-align: center;
-      font-size: 3rem;
-    }
-
-    #title {
-      text-align: center;
     }
 
     .timeline {
@@ -168,7 +152,6 @@
       justify-content: flex-start;
       align-items: flex-start;
       gap: 100px;
-      /* Espaço entre os cards */
       margin: 50px auto;
       padding: 2rem;
       overflow-x: auto;
@@ -191,12 +174,10 @@
 
     .timeline-item {
       flex: 0 0 auto;
-      /* Impede quebra de linha */
       display: flex;
       flex-direction: column;
       align-items: center;
       width: 280px;
-      /* Tamanho ideal pra caber mais cards na linha */
       scroll-snap-align: start;
       z-index: 1;
     }
@@ -209,19 +190,6 @@
       border-radius: 50%;
       margin-bottom: 1rem;
       z-index: 2;
-    }
-
-    .timeline-content p {
-      margin-top: 0;
-      font-size: 1rem;
-      /* ou 0.95rem se quiser mais compacto */
-      text-align: left;
-    }
-
-    .timeline-content h3 {
-      margin-top: 0;
-      font-size: 1rem;
-      /* ou 0.95rem se quiser mais compacto */
     }
 
     .timeline-content {
@@ -238,58 +206,53 @@
     .timeline-content:hover {
       transform: scale(1.05);
     }
+
+    .timeline-content h3,
+    .timeline-content p {
+      margin: 0;
+      font-size: 1rem;
+    }
+
+    @media (max-width: 768px) {
+      .card-container {
+        flex-direction: column;
+        align-items: center;
+        padding: 1rem;
+      }
+
+      .card {
+        width: 90%;
+      }
+    }
   </style>
 </head>
-<footer class="footer-nav">
-  <a href="index.html" class="nav-link">
-    <img src="assets/icons/home.svg" alt="Home Icon"> Início
-  </a>
-  <a href="about.html" class="nav-link">
-    <img src="assets/icons/about.svg" alt="About Icon"> Resumo
-  </a>
-  <a href="project.html" class="nav-link">
-    <img src="assets/icons/projects.svg" alt="Projects Icon"> Projetos
-  </a>
-  <a href="skills.html" class="nav-link">
-    <img src="assets/icons/skills.svg" alt="Skills Icon"> Eu
-  </a>
-  <a href="contact.html" class="nav-link">
-    <img src="assets/icons/contact.svg" alt="Contact Icon"> Contatos
-  </a>
-</footer>
 
 <body>
-
-
-  <!-- Cards de Projetos -->
   <h1 id="title">
-    <span class="pink">Projetos</span>&nbsp;<span class="white">da</span>&nbsp;<span class="blue">Aninha</span> <img
-      src="assets/images/gif azul.gif" alt="Gif fofo" style="height: 40px; vertical-align: middle; margin-right: 10px;">
+    <span class="pink">Projetos</span>&nbsp;<span class="white">da</span>&nbsp;<span class="blue">Aninha</span>
+    <img src="assets/images/gif azul.gif" alt="Gif fofo"
+      style="height: 40px; vertical-align: middle; margin-right: 10px;">
   </h1>
+
   <div class="card-container">
     <div class="card">
       <img src="assets/images/site.png" alt="Site da Cimento Açaí" />
       <h3>Site Cimento Açaí</h3>
-      <p>
-        Liderança na criação e desenvolvimento de um site institucional para a empresa, visando melhorar a
-        presença online e a comunicação com clientes e parceiros. Utilização de JavaScript, HTML, CSS, MySQL,
-        PHP para garantir um design responsivo e intuitivo.
-        <br><br>Minha experiência me trouxe pensamento crítico, trabalho em equipe, gestão de tempo, liderança,
-        inteligência emocional, adaptabilidade, dar/receber feedback.
-      </p>
+      <p>Liderança na criação e desenvolvimento de um site institucional para a empresa, visando melhorar a presença
+        online e a comunicação com clientes e parceiros. Utilização de JavaScript, HTML, CSS, MySQL, PHP para garantir
+        um design responsivo e intuitivo.<br><br>Minha experiência me trouxe pensamento crítico, trabalho em equipe,
+        gestão de tempo, liderança, inteligência emocional, adaptabilidade, dar/receber feedback.</p>
       <a href="https://www.cimentoacai.com.br/" target="_blank">Descubra mais</a>
     </div>
 
     <div class="card">
       <img src="assets/images/artigo.png" alt="Artigo sobre redes de computadores" />
       <h3>Artigo publicado no Even3</h3>
-      <p>
-        Este artigo foi escrito por mim durante o ensino médio, enquanto estudava no IFMA – Campus Açailândia,
-        na área de redes de computadores. O objetivo, junto com a equipe que colocou a mão na massa comigo no
-        projeto, era entender por que tantos alunos do Instituto tinham dificuldade em compreender os conceitos
-        de redes. <br><br>Ver hoje esse trabalho publicado no Even3 é uma alegria enorme pra mim. Dá aquela
-        sensação boa de que todo o esforço valeu a pena e que os frutos estão aparecendo.
-      </p>
+      <p>Este artigo foi escrito por mim durante o ensino médio, enquanto estudava no IFMA – Campus Açailândia, na área
+        de redes de computadores. O objetivo, junto com a equipe que colocou a mão na massa comigo no projeto, era
+        entender por que tantos alunos do Instituto tinham dificuldade em compreender os conceitos de redes.<br><br>Ver
+        hoje esse trabalho publicado no Even3 é uma alegria enorme pra mim. Dá aquela sensação boa de que todo o esforço
+        valeu a pena e que os frutos estão aparecendo.</p>
       <a href="https://www.even3.com.br/anais/universo2023/750967-redcom--uma-abordagem-no-ensino-de-redes-de-computadores-baseada-em-jogo-eletronico/"
         target="_blank">Descubra mais</a>
     </div>
@@ -297,73 +260,74 @@
     <div class="card">
       <img src="assets/images/spirit.png" alt="Site Spirit Fanfics" />
       <h3>Projeto de correção de texto</h3>
-      <p>
-        Trabalhei, voluntariamente, como corretora textual por dois anos, em um site de histórias escritas por
+      <p>Trabalhei, voluntariamente, como corretora textual por dois anos, em um site de histórias escritas por
         escritores amadores, Spirit Fanfics. Foi com muita alegria que pude contribuir com o desenvolvimento de
-        histórias fantásticas, carregadas de amor e escritas com carinho.
-      </p>
+        histórias fantásticas, carregadas de amor e escritas com carinho.</p>
       <a href="https://www.spiritfanfiction.com/" target="_blank">Descubra mais</a>
     </div>
+
   </div>
-  <section id="timeline" class="terminal-window fade-in">
-    <div class="terminal-body timeline">
+
+  <section id="timeline">
+    <div class="timeline">
       <div class="timeline-item">
         <div class="timeline-point"></div>
         <div class="timeline-content">
           <h3 class="pink">Auxiliar de Informática I</h3>
-          <p class="string">
-            Meu primeiro cargo, quando comecei no mercado de trabalho, a aproximadamente dois anos. Responsável por
-            suporte técnico e manutenção básica em sistemas e computadores. Início da trajetória na Cimento Açaí com
-            foco em atendimento interno.
-          </p>
+          <p>Responsável por suporte técnico e manutenção básica em sistemas e computadores. Início da trajetória na
+            Cimento Açaí com foco em atendimento interno.</p>
         </div>
       </div>
-
       <div class="timeline-item">
         <div class="timeline-point"></div>
         <div class="timeline-content">
           <h3 class="pink">Auxiliar de Informática II</h3>
-          <p class="string">
-            Atuação com redes, SAP e suporte
-            a vendedores. Apoio em ações de
-            marketing digital e melhorias em TI.
-          </p>
+          <p>Atuação com redes, manutenção e suporte a vendedores. Apoio em ações de marketing digital e melhorias em TI.</p>
         </div>
       </div>
       <div class="timeline-item">
         <div class="timeline-point"></div>
         <div class="timeline-content">
           <h3 class="pink">Auxiliar de Informática III</h3>
-          <p class="string">
-            Meu cargo atual. Assumindo tarefas mais estratégicas com autonomia, desenvolvimento de sistemas internos e
-            liderança técnica em projetos de TI.
-          </p>
+          <p>Assumindo tarefas mais estratégicas com autonomia, desenvolvimento de sistemas internos e liderança técnica
+            em projetos de TI.</p>
         </div>
       </div>
-
     </div>
   </section>
 
 
+  <footer class="footer-nav">
+    <a href="index.html" class="nav-link">
+      <img src="assets/icons/home.svg" alt="Home Icon"> Início
+    </a>
+    <a href="about.html" class="nav-link">
+      <img src="assets/icons/about.svg" alt="About Icon"> Resumo
+    </a>
+    <a href="project.html" class="nav-link">
+      <img src="assets/icons/projects.svg" alt="Projects Icon"> Projetos
+    </a>
+    <a href="skills.html" class="nav-link">
+      <img src="assets/icons/skills.svg" alt="Skills Icon"> Eu
+    </a>
+    <a href="contact.html" class="nav-link">
+      <img src="assets/icons/contact.svg" alt="Contact Icon"> Contatos
+    </a>
+  </footer>
+
+
+  <script>
+    const title = document.getElementById("title");
+    const options = [
+      '<span class="pink">Projetos</span>&nbsp;<span class="white">da</span>&nbsp;<span class="blue">Aninha</span> <img src="assets/images/gif azul.gif" alt="Gif fofo" style="height: 40px; vertical-align: middle; margin-right: 10px;">',
+      '<span class="blue">Experiência</span>&nbsp;<span class="white">de</span>&nbsp;<span class="pink">Trabalho</span> <img src="assets/images/gif.gif" alt="Gif fofo" style="height: 40px; vertical-align: middle; margin-right: 10px;">'
+    ];
+    let current = 0;
+    setInterval(() => {
+      current = (current + 1) % options.length;
+      title.innerHTML = options[current];
+    }, 4000);
+  </script>
 </body>
-<script>
-  const title = document.getElementById("title");
-
-  const options = [
-    '<span class="pink">Projetos</span>&nbsp;<span class="white">da</span>&nbsp;<span class="blue">Aninha</span> <img src="assets/images/gif azul.gif" alt="Gif fofo" style="height: 40px; vertical-align: middle; margin-right: 10px;">',
-
-    '<span class="blue">Experiência</span>&nbsp;<span class="white">de</span>&nbsp;<span class="pink">Trabalho</span> <img src="assets/images/gif.gif" alt="Gif fofo" style="height: 40px; vertical-align: middle; margin-right: 10px;">'
-  ];
-
-
-  let current = 0;
-
-  setInterval(() => {
-    current = (current + 1) % options.length;
-    title.classList.add("bounce");
-    title.innerHTML = options[current];
-    setTimeout(() => title.classList.remove("bounce"), 600);
-  }, 4000);
-</script>
 
 </html>
