@@ -1,216 +1,239 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/x-icon"" href=" assets/images/favicon.ico">
-    <title>About</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico" />
+  <title>Summary</title>
 
-    <style>
-        /* Coloquei aqui dentro pra facilitar, pode separar depois */
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: url('assets/images/fundo.gif') no-repeat center center fixed;
+      background-size: cover;
+      font-family: 'Inconsolata', monospace;
+      color: #f8f8f2;
+      padding-bottom: 80px; /* espaço pra footer fixo não cobrir conteúdo */
+    }
 
-        /* Fundo com gif */
-        body {
-            margin: 0;
-            padding: 0;
-            background: url('assets/images/fundo.gif') no-repeat center center fixed;
-            background-size: cover;
-            font-family: 'Inconsolata', monospace;
-            color: #f8f8f2;
-        }
+    .footer-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background-color: black;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding: 20px 0;
+      z-index: 9999;
+    }
 
-        .footer-nav {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background-color: black;
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            padding: 20px 0;
-            z-index: 9999;
-        }
+    .footer-nav .nav-link {
+      color: white;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'Maven Pro', sans-serif;
+      font-weight: 600;
+      font-size: 14px;
+      transition: color 0.3s ease;
+    }
 
-        .footer-nav .nav-link {
-            color: white;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-family: 'Maven Pro', sans-serif;
-            font-weight: 600;
-            font-size: 14px;
-            transition: color 0.3s ease;
-        }
+    .footer-nav .nav-link img {
+      width: 20px;
+      height: 20px;
+      filter: invert(1);
+    }
 
-        .footer-nav .nav-link img {
-            width: 20px;
-            height: 20px;
-            filter: invert(1);
-            /* Deixa os ícones brancos */
-        }
+    .footer-nav .nav-link:hover {
+      color: #ff69b4;
+    }
 
-        .footer-nav .nav-link:hover {
-            color: #ff69b4;
-            /* Rosa ao passar o mouse */
-        }
+    .footer-nav .nav-link:hover img {
+      filter: brightness(0) saturate(100%) invert(39%) sepia(99%) saturate(741%) hue-rotate(297deg)
+        brightness(103%) contrast(101%);
+    }
 
-        .footer-nav .nav-link:hover img {
-            filter: brightness(0) saturate(100%) invert(39%) sepia(99%) saturate(741%) hue-rotate(297deg) brightness(103%) contrast(101%);
-            /* Faz o ícone também ficar rosa ao hover */
-        }
+    /* Fundo do terminal com um pouco de transparência pra o gif aparecer atrás */
+    .terminal-window {
+      background: rgba(30, 30, 30, 0.85);
+      border-radius: 12px;
+      padding: 20px;
+      max-width: 850px;
+      margin: 80px auto;
+      box-shadow: 0 20px 40px rgba(255, 105, 180, 0.3);
+      border: 2px solid #ff69b4;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
 
-        /* Fundo do terminal com um pouco de transparência pra o gif aparecer atrás */
-        .terminal-window {
-            background: rgba(30, 30, 30, 0.85);
-            /* Preto meio transparente */
-            border-radius: 12px;
-            padding: 20px;
-            max-width: 850px;
-            margin: 80px auto;
-            box-shadow: 0 20px 40px rgba(255, 105, 180, 0.3);
-            border: 2px solid #ff69b4;
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-        }
+    .terminal-window.fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
-        .terminal-window.fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
+    .terminal-header {
+      background-color: #ffb6c1;
+      padding: 10px;
+      border-top-left-radius: 12px;
+      border-top-right-radius: 12px;
+      text-align: center;
+      color: white;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
 
-        .terminal-header {
-            background-color: #ffb6c1;
-            padding: 10px;
-            border-top-left-radius: 12px;
-            border-top-right-radius: 12px;
-            text-align: center;
-            color: white;
-            font-weight: bold;
-            letter-spacing: 1px;
-        }
+    .terminal-body {
+      padding: 20px;
+      background-color: #1e1e1e;
+      border-bottom-left-radius: 12px;
+      border-bottom-right-radius: 12px;
+      white-space: pre-wrap;
+      overflow-x: auto;
+      line-height: 1.8;
+    }
 
-        .terminal-body {
-            padding: 20px;
-            background-color: #1e1e1e;
-            border-bottom-left-radius: 12px;
-            border-bottom-right-radius: 12px;
-            white-space: pre-wrap;
-            overflow-x: auto;
-            line-height: 1.8;
-        }
+    .line {
+      display: block;
+      color: #f8f8f2;
+      font-family: 'Inconsolata', monospace;
+      font-size: 16px;
+      margin-bottom: 4px;
+    }
 
-        .line {
-            display: block;
-            color: #f8f8f2;
-            font-family: 'Inconsolata', monospace;
-            font-size: 16px;
-            margin-bottom: 4px;
-        }
+    .type::after {
+      content: "|";
+      animation: blink 1s step-start infinite;
+    }
 
-        .type::after {
-            content: "|";
-            animation: blink 1s step-start infinite;
-        }
+    @keyframes blink {
+      50% {
+        opacity: 0;
+      }
+    }
 
-        @keyframes blink {
-            50% {
-                opacity: 0;
-            }
-        }
+    .property {
+      color: #ff69b4;
+      font-weight: bold;
+    }
 
-        .property {
-            color: #ff69b4;
-            font-weight: bold;
-        }
+    .string {
+      color: #f8f8f2;
+    }
 
-        .string {
-            color: #f8f8f2;
-        }
+    .array {
+      color: #f4b400;
+    }
 
-        .array {
-            color: #f4b400;
-        }
-    </style>
+    /* Responsividade */
+    @media (max-width: 768px) {
+      .terminal-window {
+        margin: 40px 1rem 100px 1rem;
+        max-width: 95%;
+        padding: 15px;
+      }
+
+      .terminal-body {
+        font-size: 14px;
+        padding: 15px;
+      }
+
+      .footer-nav {
+        padding: 15px 0;
+      }
+
+      .footer-nav .nav-link {
+        font-size: 12px;
+        gap: 4px;
+      }
+
+      .footer-nav .nav-link img {
+        width: 18px;
+        height: 18px;
+      }
+    }
+  </style>
 </head>
-<footer class="footer-nav">
-    <a href="index.html" class="nav-link">
-        <img src="assets/icons/home.svg" alt="Home Icon"> Início
-    </a>
-    <a href="about.html" class="nav-link">
-        <img src="assets/icons/about.svg" alt="About Icon"> Resumo
-    </a>
-    <a href="project.html" class="nav-link">
-        <img src="assets/icons/projects.svg" alt="Projects Icon"> Projetos
-    </a>
-    <a href="skills.html" class="nav-link">
-        <img src="assets/icons/skills.svg" alt="Skills Icon"> Eu
-    </a>
-    <a href="contact.html" class="nav-link">
-        <img src="assets/icons/contact.svg" alt="Contact Icon"> Contatos
-    </a>
-</footer>
 
 <body>
-    <section id="about" class="terminal-window fade-in">
-        <div class="terminal-header">
-            <img src='assets//images/cafe.gif' style='height:80px; vertical-align:middle; margin-right:10px;'>
-        </div>
-        <pre class="terminal-body">
-    <div class="line type" data-text="<span class='property'>&gt; Ana.currentLocation</span>">|</div>
-    <div class="line type" data-text="<img src='assets/images/seta.gif' style='height:15px; vertical-align:middle; margin-right:4px;'><span class='string'>&quot;Brasil, Maranhão, Açailândia&quot;</span>">|</div>
+  <section id="about" class="terminal-window fade-in">
+    <div class="terminal-header">
+      <img src='assets/images/cafe.gif' style='height:80px; vertical-align:middle; margin-right:10px;' alt="Gif café" />
+    </div>
+    <pre class="terminal-body">
+<div class="line type" data-text="<span class='property'>&gt; Ana.currentLocation</span>">|</div>
+<div class="line type" data-text="<img src='assets/images/seta.gif' style='height:15px; vertical-align:middle; margin-right:4px;'><span class='string'>&quot;Brasil, Maranhão, Açailândia&quot;</span>">|</div>
 
+<div class="line type" data-text="<span class='property'>&gt; Ana.contactInfo</span>">|</div>
+<div class="line type" data-text="<img src='assets/images/seta.gif' style='height:15px; vertical-align:middle; margin-right:4px;'> <span class='array'>[&quot;anaaraujovzz@gmail.com&quot;, &quot;Substack: mirabiliam&quot;, &quot;Instagram: a.araujovaz&quot;]</span>">|</div>
 
-    <div class="line type" data-text="<span class='property'>&gt; Ana.contactInfo</span>">|</div>
-    <div class="line type" data-text="<img src='assets/images/seta.gif' style='height:15px; vertical-align:middle; margin-right:4px;'> <span class='array'>[&quot;anaaraujovzz@gmail.com&quot;, &quot;Substack: mirabiliam&quot;, &quot;Instagram: a.araujovaz&quot;]</span>">|</div>
+<div class="line type" data-text="<span class='property'>&gt; Ana.education</span>">|</div>
+<div class="line type" data-text="<img src='assets/images/seta.gif' style='height:15px; vertical-align:middle; margin-right:4px;'> <span class='array'>[&quot;Licenciatura em Letras (prev 2026)&quot;, &quot;Tecnólogo em Redes de Computadores (prev 2026)&quot;]</span>">|</div>
 
-    <div class="line type" data-text="<span class='property'>&gt; Ana.education</span>">|</div>
-    <div class="line type" data-text="<img src='assets/images/seta.gif' style='height:15px; vertical-align:middle; margin-right:4px;'> <span class='array'>[&quot;Licenciatura em Letras (prev 2026)&quot;, &quot;Tecnólogo em Redes de Computadores (prev 2026)&quot;]</span>">|</div>
+<div class="line type" data-text="<span class='property'>&gt; Ana.skills</span>">|</div>
+<div class="line type" data-text="<img src='assets/images/seta.gif' style='height:15px; vertical-align:middle; margin-right:4px;'> <span class='array'>[&quot;redes de computadores&quot;, &quot;manutenção&quot;, &quot;cloud computing&quot;, &quot;Java OO&quot;, &quot;Dev web&quot;]</span>">|</div>
 
-    <div class="line type" data-text="<span class='property'>&gt; Ana.skills</span>">|</div>
-    <div class="line type" data-text="<img src='assets/images/seta.gif' style='height:15px; vertical-align:middle; margin-right:4px;'> <span class='array'>[&quot;redes de computadores&quot;, &quot;manutenção&quot;, &quot;cloud computing&quot;, &quot;Java OO&quot;, &quot;Dev web&quot;]</span>">|</div>
+<div class="line type" data-text="<span class='property'>&gt; Ana.motto</span>">|</div>
+<div class="line type" data-text="<img src='assets/images/seta.gif' style='height:15px; vertical-align:middle; margin-right:4px;'> <span class='string'>&quot;Conectando redes, palavras e pessoas.&quot;</span>">|</div>
+    </pre>
+  </section>
 
-    <div class="line type" data-text="<span class='property'>&gt; Ana.motto</span>">|</div>
-    <div class="line type" data-text="<img src='assets/images/seta.gif' style='height:15px; vertical-align:middle; margin-right:4px;'> <span class='string'>&quot;Conectando redes, palavras e pessoas.&quot;</span>">|</div>
-  </pre>
-    </section>
+  <footer class="footer-nav">
+    <a href="index.html" class="nav-link">
+      <img src="assets/icons/home.svg" alt="Home Icon" /> Início
+    </a>
+    <a href="about.html" class="nav-link">
+      <img src="assets/icons/about.svg" alt="About Icon" /> Resumo
+    </a>
+    <a href="project.html" class="nav-link">
+      <img src="assets/icons/projects.svg" alt="Projects Icon" /> Projetos
+    </a>
+    <a href="skills.html" class="nav-link">
+      <img src="assets/icons/skills.svg" alt="Skills Icon" /> Eu
+    </a>
+    <a href="contact.html" class="nav-link">
+      <img src="assets/icons/contact.svg" alt="Contact Icon" /> Contatos
+    </a>
+  </footer>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const observer = new IntersectionObserver(entries => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                        typeLines(entry.target);
-                        observer.unobserve(entry.target);
-                    }
-                });
-            });
-
-            document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-
-            function typeLines(container) {
-                const lines = container.querySelectorAll('.type');
-                lines.forEach((line, i) => {
-                    const text = line.dataset.text;
-                    let idx = 0;
-                    line.innerHTML = '';
-
-                    const interval = setInterval(() => {
-                        if (idx <= text.length) {
-                            line.innerHTML = text.slice(0, idx);
-                            idx++;
-                        } else {
-                            clearInterval(interval);
-                        }
-                    }, 15 + i * 2); // velocidade ajustável
-                });
-            }
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            typeLines(entry.target);
+            observer.unobserve(entry.target);
+          }
         });
-    </script>
+      });
+
+      document.querySelectorAll(".fade-in").forEach((el) => observer.observe(el));
+
+      function typeLines(container) {
+        const lines = container.querySelectorAll(".type");
+        lines.forEach((line, i) => {
+          const text = line.dataset.text;
+          let idx = 0;
+          line.innerHTML = "";
+
+          const interval = setInterval(() => {
+            if (idx <= text.length) {
+              line.innerHTML = text.slice(0, idx);
+              idx++;
+            } else {
+              clearInterval(interval);
+            }
+          }, 15 + i * 2); // velocidade ajustável
+        });
+      }
+    });
+  </script>
 </body>
 
 </html>
